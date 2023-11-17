@@ -16,7 +16,7 @@ export async function POST(req, res) {
 
     let output_units = await strict_output(
       "You are an AI capable of curating course content",
-      `You are an AI capable of curating course content, for this you need more info about the topic so you can create a more tailored experience. The user will give you a topic they want to learn about. What five questions would you give him to better understand his needs or his level or any important details so you can create a better course, with units and chapters. The questions will not be related to the learning preference of the user(books, videos etc.) or the learning style. The questions will be short and condensed, no more than 20 words each. User input is : ${body.courseTheme}`,
+      `Your sole task is to craft five questions that the user must answer to facilitate the development of a better course. Your questions should begin by assuming no prior knowledge about the topic the user wishes to learn, gradually progressing to more specific questions pertaining to the topic to effectively address the user's unique learning requirements in the context of mastering the topic. These five questions should be concise and succinct, not exceeding 20 words each.The questions must have the intention to help understand exactly what type of course the user needs. The questions should not inquire about the user's preferred learning method (e.g., books, videos, etc.). The user seeks to learn about: ${body.courseTheme}`,
       { questions: "an array of 5 questions" },
     );
     console.log(output_units);
