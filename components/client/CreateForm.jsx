@@ -108,25 +108,30 @@ export default function CreateForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-3"
+        className="flex w-[90%] max-w-2xl flex-col gap-3"
       >
         {generatedQuestions && generatedQuestions.length > 0 ? (
           <FormField
             control={form.control}
             name="topic"
+            className="w-full"
             render={({ field }) => (
-              <FormItem className="flex max-w-2xl flex-col gap-4">
-                <FormLabel className="flex flex-col gap-1">
+              <FormItem className="flex w-full flex-col items-start justify-start gap-3">
+                <FormLabel className="flex w-full flex-col items-start justify-center gap-2">
                   <p className="text-xl sm:text-2xl">
                     {generatedQuestions[currentQuestion]}
                   </p>
-                  <p className="">
+                  <p className=" text-zinc-400 ">
                     <span className="text-primary">&#9432;</span> Lorem ipsum
                     dolor sit amet consectetur adipisicing elit.{" "}
                   </p>
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="your response" {...field} />
+                  <Input
+                    className="h-14"
+                    placeholder="your response"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -136,12 +141,13 @@ export default function CreateForm({
           <FormField
             control={form.control}
             name="topic"
+            className="w-full"
             render={({ field }) => (
-              <FormItem className="flex max-w-2xl flex-col gap-4">
+              <FormItem className="flex w-full flex-col items-start justify-start gap-3">
                 <FormLabel className="flex flex-col gap-1">
                   <p className="text-xl sm:text-2xl">Topic</p>
-                  <p>
-                    <span className="text-primary">&#9432;</span> Lorem ipsum
+                  <p className="text-zinc-400">
+                    <span className="text-primary ">&#9432;</span> Lorem ipsum
                     dolor sit amet consectetur adipisicing elit.{" "}
                   </p>
                 </FormLabel>
@@ -158,13 +164,13 @@ export default function CreateForm({
           />
         )}
         {generatedQuestions && generatedQuestions.length > 0 ? (
-          <Button type="submit">
+          <Button className="h-14 text-lg" type="submit">
             {currentQuestion < generatedQuestions.length - 1
               ? "Next"
               : "Submit"}
           </Button>
         ) : (
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" className="h-14 text-lg" disabled={isLoading}>
             Submit
           </Button>
         )}
