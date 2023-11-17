@@ -75,14 +75,16 @@ export default function CreateForm() {
         answer: values.topic,
       });
       try {
-        const QandA = answers.push({
+        answers.push({
           question: generatedQuestions[currentQuestion],
           answer: values.topic,
         });
+        console.log(answers);
         const res = await axios.post("/api/course/generateCourse", {
           courseTheme,
-          QandA,
+          answers,
         });
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
