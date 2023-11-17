@@ -44,6 +44,79 @@ model User {
   emailVerified     DateTime?
   image             String?
 
+  friends            User[]    @relation("Friendship")
+  friendsOf          User[]  @relation("Friendship")
+  sentRequests FriendRequest[] @relation("SentFriendRequests")
+  receivedRequests FriendRequest[] @relation("ReceivedFriendRequests")
+
   accounts          Account[]
   sessions          Session[]
+}
+
+model FriendRequest {
+  id          String           @id @default(cuid())
+  status      RequestStatus
+  senderId    String
+  receiverId  String
+  sender      User     @relation("SentFriendRequests", fields: [senderId], references: [id])
+  receiver    User   @relation("ReceivedFriendRequests", fields: [receiverId], references: [id])
+}
+
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  DENIED
+}
+
+model Course {
+  id            String    @id @default(cuid())
+  name          String
+  units         Unit[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Unit {
+  id            String    @id @default(cuid())
+  courseId      String
+  name          String
+  course        Course    @relation(fields: [courseId], references: [id])
+  lessons       Lesson[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([courseId], name: "courseId")
+}
+
+model Lesson {
+  id                    String    @id @default(cuid())
+  unitId                String
+  name                  String
+  youtubeSearchQuery    String
+  youtubeVideoId        String?
+  summary               String?   @db.VarChar(3000)
+  unit                  Unit      @relation(fields: [unitId], references: [id])
+  questions             Question[]
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([unitId], name: "unitId")
+}
+
+model Question {
+  id                    String    @id @default(cuid())
+  lessonId              String
+  question              String    @db.VarChar(3000)
+  correctAnswer         String    @db.VarChar(3000)
+  answers               String    @db.VarChar(3000)
+  lesson                Lesson    @relation(fields: [lessonId], references: [id])
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([lessonId], name: "lessonId")
 }
