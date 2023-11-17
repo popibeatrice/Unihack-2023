@@ -49,6 +49,8 @@ model User {
   sentRequests FriendRequest[] @relation("SentFriendRequests")
   receivedRequests FriendRequest[] @relation("ReceivedFriendRequests")
 
+  courses           Course[]
+
   accounts          Account[]
   sessions          Session[]
 }
@@ -71,8 +73,11 @@ enum RequestStatus {
 
 model Course {
   id            String    @id @default(cuid())
+  userId        String
   name          String
   units         Unit[]
+
+  user          User      @relation(fields: [userId], references: [id])
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
