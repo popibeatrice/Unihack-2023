@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
+    "dev": "next dev --turbo --turbo",
+    "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -24,6 +24,7 @@
     "openai": "^3.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.32.6",
     "react-hook-form": "^7.48.2",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
