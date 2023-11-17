@@ -1,6 +1,16 @@
 "use client";
 
 import axios from "axios";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,8 +42,10 @@ const formSchema = z.object({
     }),
 });
 
-export default function CreateForm() {
-  const [generatedQuestions, setGeneratedQuestions] = useState(null);
+export default function CreateForm({
+  generatedQuestions,
+  setGeneratedQuestions,
+}) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -96,17 +108,25 @@ export default function CreateForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-3"
+        className="flex w-full flex-col gap-3"
       >
         {generatedQuestions && generatedQuestions.length > 0 ? (
           <FormField
             control={form.control}
             name="topic"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{generatedQuestions[currentQuestion]}</FormLabel>
+              <FormItem className="flex max-w-2xl flex-col gap-4">
+                <FormLabel className="flex flex-col gap-1">
+                  <p className="text-xl sm:text-2xl">
+                    {generatedQuestions[currentQuestion]}
+                  </p>
+                  <p className="">
+                    <span className="text-primary">&#9432;</span> Lorem ipsum
+                    dolor sit amet consectetur adipisicing elit.{" "}
+                  </p>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="your response" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -117,10 +137,20 @@ export default function CreateForm() {
             control={form.control}
             name="topic"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Topic</FormLabel>
+              <FormItem className="flex max-w-2xl flex-col gap-4">
+                <FormLabel className="flex flex-col gap-1">
+                  <p className="text-xl sm:text-2xl">Topic</p>
+                  <p>
+                    <span className="text-primary">&#9432;</span> Lorem ipsum
+                    dolor sit amet consectetur adipisicing elit.{" "}
+                  </p>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Guitar" {...field} />
+                  <Input
+                    className="h-14"
+                    placeholder="ex: playing the guitar"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
