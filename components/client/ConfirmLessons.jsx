@@ -2,21 +2,21 @@
 
 import LessonCard from "./LessonCard";
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "@/components/ui/button";
+
+import axios from "axios";
 
 export default function ConfirmLessons({ course }) {
   async function handleSubmit() {
-    const promises = [];
+    const lessons = [];
     try {
       for (const unit of course.units)
         for (const lesson of unit.lessons) {
-          promises.push(
-            axios.post("/api/course/generateCourse", {
-              lessonId: lesson.id,
-            }),
-          );
+          lessons.push(lesson);
         }
-      const res = await Promise.all(promises);
+      const res = await axios.post("/api/course/generateCourse", {
+        lessons,
+      });
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -42,14 +42,7 @@ export default function ConfirmLessons({ course }) {
       })}
       <div className="mt-4 flex items-center justify-center">
         <div className="mx-4 flex items-center">
-          <Link
-            href="/dashboard/createCourse"
-            className={buttonVariants({
-              variant: "secondary",
-            })}
-          >
-            Back
-          </Link>
+          <Link href="/dashboard/createCourse">Back</Link>
           <Button
             type="button"
             className="ml-4 font-semibold"

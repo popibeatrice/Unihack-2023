@@ -1,9 +1,9 @@
 import ConfirmLessons from "@/components/client/ConfirmLessons";
 import { getAuthSession } from "@/lib/auth";
-import { prisma } from "@/lib/db";
+import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
 
-export default async function CreateChapters({ params: { courseId } }) {
+export default async function CreateLessons({ params: { courseId } }) {
   const session = await getAuthSession();
   if (!session) {
     return redirect("/");
@@ -20,6 +20,7 @@ export default async function CreateChapters({ params: { courseId } }) {
       },
     },
   });
+
   if (!course) {
     return redirect("/dashboard/createCourse");
   }

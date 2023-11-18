@@ -90,10 +90,8 @@ export default function CreateForm({
           courseTheme,
           answers,
         });
-
-        console.log(res);
-
-        router.push(`/dashboard/createCourse/${res}`);
+        console.log(res.data.courseId);
+        router.push(`/dashboard/createCourse/${res.data.courseId}`);
       } catch (error) {
         console.log(error);
       } finally {
