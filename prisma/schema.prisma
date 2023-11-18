@@ -99,7 +99,7 @@ model Unit {
 }
 
 model Lesson {
-  id                    String    @id @default(cuid())
+  id                    String    @id @default(cuid()) @unique
   unitId                String
   name                  String
   youtubeSearchQuery    String

@@ -20,6 +20,9 @@ export async function POST(req) {
         id: lessonId,
       },
     });
+
+    console.log(lesson);
+
     if (!lesson) {
       return NextResponse.json(
         {
