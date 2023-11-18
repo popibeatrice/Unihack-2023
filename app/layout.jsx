@@ -31,7 +31,7 @@ export default async function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${inter.variable} ${handwrite.variable}`}
     >
-      <body className="font-inter dark px-4 sm:px-8">
+      <body className="dark px-4 font-inter sm:px-8">
         <Header>
           {session ? <UserWidget session={session} /> : <LogInButton />}
         </Header>
