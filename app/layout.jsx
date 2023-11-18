@@ -20,6 +20,8 @@ import Header from "@/components/Header";
 import UserWidget from "@/components/client/UserWidget";
 import LogInButton from "@/components/client/LogInButton";
 
+import { Provider } from "@/components/client/Provider";
+
 import { getAuthSession } from "@/lib/auth";
 
 export default async function RootLayout({ children }) {
@@ -32,10 +34,12 @@ export default async function RootLayout({ children }) {
       className={`${inter.variable} ${handwrite.variable}`}
     >
       <body className="dark px-4 font-inter sm:px-8">
-        <Header>
-          {session ? <UserWidget session={session} /> : <LogInButton />}
-        </Header>
-        {children}
+        <Provider>
+          <Header>
+            {session ? <UserWidget session={session} /> : <LogInButton />}
+          </Header>
+          {children}
+        </Provider>
       </body>
     </html>
   );
