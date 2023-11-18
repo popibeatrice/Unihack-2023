@@ -24,6 +24,7 @@
     "next": "14.0.3",
     "next-auth": "^4.24.5",
     "openai": "^3.3.0",
+    "@tanstack/react-query": "^4.32.6",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
