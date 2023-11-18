@@ -9,7 +9,7 @@ const LessonCard = React.forwardRef(
     const [success, setSuccess] = React.useState(null);
     const { mutate: getLessonInfo, isLoading } = useMutation({
       mutationFn: async () => {
-        const response = await axios.post("/api/course/generateQuestions", {
+        const response = await axios.post("/api/course/generateCourse", {
           lessonId: lesson.id,
         });
         return response.data;

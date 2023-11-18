@@ -13,6 +13,8 @@ export async function POST(req) {
   try {
     const { lessonId } = await req.json();
 
+    console.log(lessonId);
+
     const lesson = await prisma.lesson.findUnique({
       where: {
         id: lessonId,
@@ -38,11 +40,11 @@ export async function POST(req) {
       { summary: "summary of the transcript" },
     );
 
-    console.log(summary);
+    console.log("SUMMARY", summary);
 
     const questions = await getQuestionsFromTranscript(summary, lesson.name);
 
-    console.log(questions);
+    console.log("QUESTIONS", questions);
 
     await prisma.question.createMany({
       data: questions.map((question) => {
