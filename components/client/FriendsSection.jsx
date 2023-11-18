@@ -9,7 +9,8 @@ import { useState } from "react";
 
 import axios from "axios";
 
-function FriendsSection({ pendingRequestsList, friendsList }) {
+function FriendsSection({ session, pendingRequestsList, friendsList }) {
+  const imgUrl = session.user.image;
   const [pendingRequests, setPendingRequests] = useState(pendingRequestsList);
   const [friends, setFriends] = useState(friendsList);
 
@@ -57,7 +58,7 @@ function FriendsSection({ pendingRequestsList, friendsList }) {
   return (
     <Tabs
       defaultValue="friends"
-      className="mx-auto flex w-full flex-col items-center"
+      className="mx-auto flex w-full flex-col items-center gap-5"
     >
       <TabsList className="grid w-full max-w-xl grid-cols-2 sm:h-14 sm:px-4">
         <TabsTrigger className="sm:text-xl" value="friends">
@@ -67,12 +68,13 @@ function FriendsSection({ pendingRequestsList, friendsList }) {
           Requests
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="friends">
-        <div className="flex flex-col items-center justify-center gap-3">
+      <TabsContent className="w-full max-w-2xl" value="requests">
+        <div className="flex w-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-800 p-5">
           <h2 className="text-center text-3xl">Requests</h2>
           {pendingRequests.length > 0 ? (
             pendingRequests.map((sender) => (
               <FriendRequest
+                imgUrl={imgUrl}
                 key={sender.name}
                 id={sender.id}
                 acceptFriendRequest={acceptFriendRequest}
@@ -86,19 +88,22 @@ function FriendsSection({ pendingRequestsList, friendsList }) {
           )}
         </div>
       </TabsContent>
-      <TabsContent value="requests">
-        <div className="flex flex-col items-center justify-center gap-3">
+      <TabsContent className="w-full max-w-2xl" value="friends">
+        <div className="flex w-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-800 p-5">
           <h2 className="text-center text-3xl">Friends</h2>
           {friends.length > 0 ? (
-            friends.map((friend) => (
-              <FriendCard
-                id={friend.id}
-                declineFriendRequest={deleteFriend}
-                key={friend.name}
-              >
-                {friend.name}
-              </FriendCard>
-            ))
+            <ul className="w-[90%]">
+              {friends.map((friend) => (
+                <FriendCard
+                  imgUrl={imgUrl}
+                  id={friend.id}
+                  declineFriendRequest={deleteFriend}
+                  key={friend.name}
+                >
+                  {friend.name}
+                </FriendCard>
+              ))}
+            </ul>
           ) : (
             <span>No friends!</span>
           )}
