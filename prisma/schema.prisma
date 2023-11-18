@@ -37,7 +37,7 @@ model Session {
 }
  
 model User {
-  id                String    @id @default(cuid())
+  id                String    @id @default(cuid()) @unique
   name              String?
   email             String?   @unique
   points            Int       @default(0)
@@ -81,6 +81,8 @@ model Course {
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  @@index([userId], name: "userId")
 }
 
 model Unit {
