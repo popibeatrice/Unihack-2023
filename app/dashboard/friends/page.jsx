@@ -48,7 +48,6 @@ export default async function Friends() {
   if (!session) {
     return redirect("/");
   }
-
   const pendingRequestsList = await getPendingRequests(session);
   const friendsList = await getFriends(session);
 
