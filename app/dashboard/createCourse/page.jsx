@@ -12,7 +12,7 @@ export default async function CoursePage() {
     return redirect("/");
   }
   return (
-    <main className="mt-20 flex min-h-[calc(100vh_-_175px)] w-full flex-col items-center gap-14 sm:mt-0 sm:justify-center">
+    <main className="flex min-h-[calc(100vh_-_175px)] w-full flex-col items-center gap-14 pt-20 sm:justify-center sm:pt-0">
       <CourseCreationContent />
     </main>
   );
