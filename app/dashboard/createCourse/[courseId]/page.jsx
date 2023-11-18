@@ -1,4 +1,4 @@
-import ConfirmChapters from "@/components/ConfirmChapters";
+import ConfirmLessons from "@/components/client/ConfirmLessons";
 import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -36,7 +36,7 @@ export default async function CreateChapters({ params: { courseId } }) {
           click the Button to confirm and continue.
         </div>
       </div>
-      <ConfirmChapters course={course} />
+      <ConfirmLessons course={course} />
     </div>
   );
 }

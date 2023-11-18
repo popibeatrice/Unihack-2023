@@ -36,6 +36,8 @@ export async function POST(req) {
       },
     });
 
+    console.log(course);
+
     for (const unit of output_units.course) {
       const title = unit.unitTitle;
       const prismaUnit = await prisma.unit.create({
@@ -55,7 +57,7 @@ export async function POST(req) {
       });
     }
 
-    return NextResponse.json({ courseId: course.id }, { status: 200 });
+    return NextResponse.json(course.id, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ message: "NOT OK" }, { status: 400 });

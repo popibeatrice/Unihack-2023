@@ -80,18 +80,24 @@ export default function CreateForm({
         answer: values.topic,
       });
       try {
+        setIsLoading(true);
         answers.push({
           question: generatedQuestions[currentQuestion],
           answer: values.topic,
         });
         console.log(answers);
-        const { courseId } = await axios.post("/api/course/generateRoadmap", {
+        const res = await axios.post("/api/course/generateRoadmap", {
           courseTheme,
           answers,
         });
-        router.push(`dashboard/createCourse/${courseId}`);
+
+        console.log(res);
+
+        router.push(`/dashboard/createCourse/${res}`);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     }
     form.reset();
