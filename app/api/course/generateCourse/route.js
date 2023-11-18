@@ -1,59 +1,83 @@
+import { prisma } from "@/lib/db";
+import { strict_output } from "@/lib/gpt";
+import {
+  getQuestionsFromTranscript,
+  getTranscript,
+  searchYoutube,
+} from "@/lib/youtube";
 import { NextResponse } from "next/server";
-import strict_output from "@/lib/gpt";
-
-import prisma from "@/lib/db";
 
 import { getAuthSession } from "@/lib/auth";
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
-    const session = await getAuthSession(req);
+    const session = await getAuthSession();
 
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const { courseTheme, answers } = await req.json();
-    let output_units = await strict_output(
-      "You are an AI capable of curating course content",
-      `You are an AI capable of curating course content, generating relevant chapter titles, and identifying pertinent YouTube videos for each chapter. Your task is to design a course about ${courseTheme}. Consider the following 5 questions and the user's responses (you will get an array with 5 objects, each containing the question and it s answer) : ${answers}. For each chapter, provide a detailed YouTube search query that can be used to locate an informative and educational video. Each query should yield an educational and informative YouTube lesson.`,
-      {
-        course:
-          "an array of objects, each object containg the unit title (unitTitle) and a lessons array, each lesson from the lessons array should have a youtube_search_query and a lesson_title key in the JSON object",
+    const { lessonId } = await req.json();
+    const lesson = await prisma.lesson.findUnique({
+      where: {
+        id: lessonId,
       },
+    });
+    if (!lesson) {
+      return NextResponse.json(
+        {
+          message: "Lesson not found",
+        },
+        { status: 404 },
+      );
+    }
+    const videoId = await searchYoutube(lesson.youtubeSearchQuery);
+    let transcript = await getTranscript(videoId);
+    let maxLength = 500;
+    transcript = transcript.split(" ").slice(0, maxLength).join(" ");
+
+    const { summary } = await strict_output(
+      "You are an AI capable of summarising a youtube transcript",
+      "summarise in 250 words or less and do not talk of the sponsors or anything unrelated to the main topic, also do not introduce what the summary is about.\n" +
+        transcript,
+      { summary: "summary of the transcript" },
     );
 
-    console.log(output_units.course);
+    const questions = await getQuestionsFromTranscript(transcript, lesson.name);
 
-    const course = await prisma.course.create({
+    await prisma.question.createMany({
+      data: questions.map((question) => {
+        let options = [
+          question.answer,
+          question.option1,
+          question.option2,
+          question.option3,
+        ];
+        options = options.sort(() => Math.random() - 0.5);
+        return {
+          question: question.question,
+          answer: question.answer,
+          options: JSON.stringify(options),
+          lessonId: lessonId,
+        };
+      }),
+    });
+
+    await prisma.lesson.update({
+      where: { id: lessonId },
       data: {
-        name: courseTheme,
-        userId: session.id,
+        videoId: videoId,
+        summary: summary,
       },
     });
 
-    for (const unit of output_units.course) {
-      const title = unit.unitTitle;
-      const prismaUnit = await prisma.unit.create({
-        data: {
-          name: title,
-          courseId: course.id,
-        },
-      });
-      await prisma.lesson.createMany({
-        data: unit.lessons.map((lesson) => {
-          return {
-            name: lesson.lesson_title,
-            youtubeSearchQuery: lesson.youtube_search_query,
-            unitId: prismaUnit.id,
-          };
-        }),
-      });
-    }
-
-    return NextResponse.json(output_units);
-  } catch (err) {
-    console.log(err);
-    return NextResponse({ message: "NOT OK" }, { status: 400 });
+    return NextResponse.json({ message: "OK" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        messaage: "NOT OK",
+      },
+      { status: 500 },
+    );
   }
 }

@@ -1,16 +1,6 @@
 "use client";
 
 import axios from "axios";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,6 +19,8 @@ import { Input } from "@/components/ui/input";
 
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 let courseTheme;
 
 const formSchema = z.object({
@@ -46,6 +38,7 @@ export default function CreateForm({
   generatedQuestions,
   setGeneratedQuestions,
 }) {
+  const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -92,11 +85,11 @@ export default function CreateForm({
           answer: values.topic,
         });
         console.log(answers);
-        const res = await axios.post("/api/course/generateCourse", {
+        const { courseId } = await axios.post("/api/course/generateRoadmap", {
           courseTheme,
           answers,
         });
-        console.log(res);
+        router.push(`dashboard/createCourse/${courseId}`);
       } catch (error) {
         console.log(error);
       }
