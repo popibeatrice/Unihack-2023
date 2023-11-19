@@ -2,6 +2,8 @@ import { getAuthSession } from "@/lib/auth";
 
 import LateralNav from "@/components/LateralNav";
 
+import prisma from "@/lib/db";
+
 import { redirect } from "next/navigation";
 
 const getBoard = async (session) => {
