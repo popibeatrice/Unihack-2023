@@ -4,6 +4,8 @@ import { getAuthSession } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
 
+import LateralNav from "@/components/LateralNav";
+
 async function getCourses(session) {
   try {
     if (!session) {
@@ -43,15 +45,18 @@ export default async function Gallery() {
   const courses = await getCourses(session);
 
   return (
-    <main className="flex min-h-[calc(100vh_-_175px)] w-full flex-col items-center justify-start gap-10 sm:gap-16 md:gap-20">
-      <h1 className="w-[90%] text-center text-4xl font-light sm:text-5xl md:text-6xl">
-        Your <span className="font-handwrite text-primary">courses</span>
-      </h1>
-      <div className="grid w-[90%] justify-items-center gap-10 min-[900px]:grid-cols-2">
-        {courses.map((course, index) => (
-          <CourseCard key={index} course={course} index={index} />
-        ))}
-      </div>
-    </main>
+    <>
+      <LateralNav />
+      <main className="flex min-h-[calc(100vh_-_175px)] w-full flex-col items-center justify-start gap-10 sm:gap-16 md:gap-20">
+        <h1 className="w-[90%] text-center text-4xl font-light sm:text-5xl md:text-6xl">
+          Your <span className="font-handwrite text-primary">courses</span>
+        </h1>
+        <div className="mb-32 grid w-[90%] justify-items-center gap-10 min-[900px]:grid-cols-2">
+          {courses.map((course, index) => (
+            <CourseCard key={index} course={course} index={index} />
+          ))}
+        </div>
+      </main>
+    </>
   );
 }
