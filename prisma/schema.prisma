@@ -103,6 +103,9 @@ model Lesson {
   unitId                String
   name                  String
   youtubeSearchQuery    String
+
+  quizDone              Boolean   @default(false)
+
   youtubeVideoId        String?
   summary               String?   @db.VarChar(3000)
   unit                  Unit      @relation(fields: [unitId], references: [id])
