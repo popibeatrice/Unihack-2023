@@ -54,7 +54,6 @@ function FriendsSection({ session, pendingRequestsList, friendsList }) {
       console.error(error);
     }
   }
-
   return (
     <Tabs
       defaultValue="friends"
@@ -69,33 +68,37 @@ function FriendsSection({ session, pendingRequestsList, friendsList }) {
         </TabsTrigger>
       </TabsList>
       <TabsContent className="w-full max-w-2xl" value="requests">
-        <div className="flex w-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-800 p-5">
+        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-5">
           <h2 className="text-center text-3xl">Requests</h2>
           {pendingRequests.length > 0 ? (
-            pendingRequests.map((sender) => (
-              <FriendRequest
-                imgUrl={imgUrl}
-                key={sender.name}
-                id={sender.id}
-                acceptFriendRequest={acceptFriendRequest}
-                declineFriendRequest={declineFriendRequest}
-              >
-                {sender.name}
-              </FriendRequest>
-            ))
+            <ul className="max-h-[300px] w-[95%] overflow-y-auto md:w-[90%]">
+              {pendingRequests.map((sender) => (
+                <FriendRequest
+                  imgUrl={sender.icon}
+                  key={sender.name}
+                  id={sender.id}
+                  acceptFriendRequest={acceptFriendRequest}
+                  declineFriendRequest={declineFriendRequest}
+                >
+                  {sender.name}
+                </FriendRequest>
+              ))}
+            </ul>
           ) : (
             <span>No requests!</span>
           )}
         </div>
       </TabsContent>
       <TabsContent className="w-full max-w-2xl" value="friends">
-        <div className="flex w-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-800 p-5">
-          <h2 className="text-center text-3xl">Friends</h2>
+        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-5">
+          <h2 className="text-center text-3xl tracking-wide md:text-4xl">
+            Friends
+          </h2>
           {friends.length > 0 ? (
-            <ul className="w-[90%]">
+            <ul className="max-h-[300px] w-[95%] overflow-y-auto md:w-[90%]">
               {friends.map((friend) => (
                 <FriendCard
-                  imgUrl={imgUrl}
+                  imgUrl={friend.icon}
                   id={friend.id}
                   declineFriendRequest={deleteFriend}
                   key={friend.name}

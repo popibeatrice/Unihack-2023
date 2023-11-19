@@ -44,6 +44,8 @@ function AddFriend() {
       console.log(res);
     } catch (error) {
       console.log(error);
+    } finally {
+      form.reset();
     }
   }
 
@@ -51,7 +53,7 @@ function AddFriend() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex grow flex-col items-center justify-start gap-3 sm:flex-row sm:self-start"
+        className="flex w-[90%] max-w-2xl flex-col items-center justify-start gap-3 sm:flex-row "
       >
         <FormField
           control={form.control}

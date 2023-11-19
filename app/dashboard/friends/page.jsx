@@ -12,7 +12,7 @@ const getFriends = async (session) => {
       include: { friends: true },
     });
     return user.friends.map((friend) => {
-      return { id: friend.id, name: friend.name, icon: friend.icon };
+      return { id: friend.id, name: friend.name, icon: friend.image };
     });
   } catch (error) {
     console.error(error);
@@ -34,7 +34,7 @@ const getPendingRequests = async (session) => {
     return pendingRequests.map((request) => ({
       id: request.sender.id,
       name: request.sender.name,
-      icon: request.sender.icon,
+      icon: request.sender.image,
     }));
   } catch (error) {
     console.error(error);
@@ -56,7 +56,7 @@ export default async function Friends() {
       <h1 className="text-center text-6xl">
         Your <span className="font-handwrite text-primary">social</span> portal
       </h1>
-      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-start">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
         <span className="text-3xl sm:self-end">
           <span className="font-handwrite text-4xl text-primary">New</span>{" "}
           friend:
