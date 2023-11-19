@@ -146,7 +146,7 @@ export default function QuizCards({ lesson }) {
   };
 
   return (
-    <div className="my-16 flex-[1] px-3">
+    <div className="mb-32 mt-16 flex-[1] px-3">
       <h1 className="text-center text-3xl font-bold">
         <span className="font-handwrite text-4xl text-primary">Concept</span>{" "}
         Check

@@ -18,9 +18,21 @@ export default async function Home() {
           enhanced by <br className="sm:hidden" />
           <span className="font-medium">AI</span>
         </h1>
-        <p className="hidden max-w-lg text-zinc-400 sm:block">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-          obcaecati?
+        <p className="hidden max-w-lg text-lg text-zinc-400 sm:block">
+          Learn from the{" "}
+          <span className="font-handwrite text-2xl font-semibold text-primary">
+            best
+          </span>
+          , and let the AI do the{" "}
+          <span className="font-handwrite text-2xl font-semibold text-primary">
+            rest
+          </span>
+          . Get a personalized learning experience, tailored to your needs, in
+          just{" "}
+          <span className="font-handwrite text-2xl font-semibold text-primary">
+            a few clicks
+          </span>
+          .
         </p>
         {!session ? (
           <LogInButtonTrimitator />
@@ -36,7 +48,7 @@ export default async function Home() {
       <div className="flex w-full flex-col items-center justify-center self-start sm:self-auto">
         <Image
           src={heroImg}
-          className="w-full max-w-[275px] opacity-30 min-[350px]:max-w-[300px] sm:max-w-2xl sm:self-auto"
+          className="w-full max-w-[275px] opacity-40 min-[350px]:max-w-[300px] sm:max-w-2xl sm:self-auto"
           alt="Landing Image"
           priority
         ></Image>
