@@ -5,7 +5,7 @@ export default function CourseCard({ course, index }) {
     course.name.charAt(0).toUpperCase() + course.name.slice(1);
   return (
     <Link
-      href={`/dashboard/${course.id}`}
+      href={`/dashboard/course/${course.id}/0/0`}
       className={`flex w-full max-w-lg flex-col gap-6 rounded-xl bg-zinc-800 p-5 duration-200 hover:outline hover:outline-primary focus:outline-primary ${
         index % 2 === 0
           ? "min-[900px]:justify-self-end"

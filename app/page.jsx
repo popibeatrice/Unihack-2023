@@ -2,8 +2,10 @@
 import Image from "next/image";
 import heroImg from "./assets/landingHeroImage.png";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { getAuthSession } from "@/lib/auth";
+import LogInButtonTrimitator from "@/components/client/LogInButtonTrimitator";
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -21,11 +23,12 @@ export default async function Home() {
           obcaecati?
         </p>
         {!session ? (
-          <Link className={buttonVariants({ variant: "default" })} href="/">
-            Join now
-          </Link>
+          <LogInButtonTrimitator />
         ) : (
-          <Link className={buttonVariants({ variant: "default" })} href="/">
+          <Link
+            className={buttonVariants({ variant: "default" })}
+            href="/dashboard/gallery"
+          >
             Dashboard
           </Link>
         )}
