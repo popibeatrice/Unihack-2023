@@ -16,8 +16,9 @@ export async function POST(req) {
     console.log("Suntem in endpoint");
 
     const { courseTheme, answers } = await req.json();
+
     let output_units = await strict_output(
-      "You are a very fast AI capable of curating course content",
+      "You are a very fast AI capable of curating course content, and you ARE BRIEF",
       `You are capable of coming up with a course that contains relevant unit titles, and identifying pertinent YouTube videos for each lesson of the unit. Your task is to design a course about ${courseTheme} made out of a maximum of 3 units, each unit containing a maximum of 2 lessons, to give you more context, use this vector of questions and answers about the topic of the course to generate a more tailored course: ${answers}. For each lesson, provide a detailed YouTube search query that can be used to locate an informative and educational video. Each query should yield an educational and informative YouTube lesson. BE BRIEF`,
       {
         course:
@@ -27,7 +28,6 @@ export async function POST(req) {
 
     console.log(output_units);
     console.log("Am terminat de generat");
-    console.log(output_units.course);
 
     const course = await prisma.course.create({
       data: {
@@ -35,8 +35,6 @@ export async function POST(req) {
         userId: session.id,
       },
     });
-
-    console.log(course);
 
     for (const unit of output_units.course) {
       const title = unit.unitTitle;

@@ -1,5 +1,7 @@
 import { getAuthSession } from "@/lib/auth";
 
+import prisma from "@/lib/db";
+
 export async function POST(req) {
   try {
     const session = await getAuthSession();

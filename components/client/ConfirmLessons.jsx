@@ -48,7 +48,7 @@ export default function ConfirmLessons({ course }) {
       })}
       <div className="mt-4 flex items-center justify-center">
         <div className="mx-4 flex items-center gap-3">
-          <Link href="/dashboard/generateCourse" className="">
+          <Link href="/dashboard/createCourse" className="">
             Back
           </Link>
           {totalLessonsCount === completedLessons.size ? (
