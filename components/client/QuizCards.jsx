@@ -1,9 +1,9 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 const QuizCards = ({ lesson }) => {
   const [answers, setAnswers] = React.useState({});
@@ -22,8 +22,11 @@ const QuizCards = ({ lesson }) => {
     });
   }, [answers, questionState, lesson.questions]);
   return (
-    <div className="ml-8 mt-16 flex-[1]">
-      <h1 className="text-2xl font-bold">Concept Check</h1>
+    <div className="my-16 flex-[1] px-3">
+      <h1 className="text-center text-3xl font-bold">
+        <span className="font-handwrite text-4xl text-primary">Concept</span>{" "}
+        Check
+      </h1>
       <div className="mt-2">
         {lesson.questions.map((question) => {
           const options = JSON.parse(question.answers);

@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { Separator } from "./ui/separator";
+import { Separator } from "@/components/ui/separator";
 
-const CourseSideBar = async ({ course, currentLessonId }) => {
+const CourseSideBar = async ({ course, currentLessonId, show }) => {
   return (
-    <div className="absolute top-1/2 w-[400px] -translate-y-1/2 rounded-r-3xl bg-secondary p-6">
-      <h1 className="text-4xl font-bold">{course.name}</h1>
+    <div className={`rounded-xl bg-secondary p-6 ${show}`}>
+      <h1 className="text-4xl font-bold capitalize">{course.name}</h1>
       {course.units.map((unit, unitIndex) => {
         return (
           <div key={unit.id} className="mt-4">
@@ -18,9 +18,9 @@ const CourseSideBar = async ({ course, currentLessonId }) => {
               return (
                 <div key={lesson.id}>
                   <Link
-                    href={`/course/${course.id}/${unitIndex}/${lessonIndex}`}
+                    href={`/dashboard/course/${course.id}/${unitIndex}/${lessonIndex}`}
                     className={cn("text-secondary-foreground/60", {
-                      "font-bold text-green-500": lesson.id === currentLessonId,
+                      "font-bold text-primary": lesson.id === currentLessonId,
                     })}
                   >
                     {lesson.name}
