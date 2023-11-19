@@ -4,6 +4,7 @@ import React from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import prisma from "@/lib/db";
 import axios from "axios";
 // const QuizCards = ({ lesson }) => {
 //   const [answers, setAnswers] = React.useState({});
@@ -107,10 +108,7 @@ export default function QuizCards({ lesson }) {
     }
     await ModificariMajore();
     const res = axios.post("/api/course/quizHandle", {
-      punctaj: punctaj,
-      answers: answers,
-      questionState: questionState,
-      lessonId: lesson.id,
+      lesson,
     });
     console.log(punctaj);
     console.log(questionState);
@@ -146,7 +144,7 @@ export default function QuizCards({ lesson }) {
   };
 
   return (
-    <div className="mb-32 mt-16 flex-[1] px-3">
+    <div className="my-16 flex-[1] px-3">
       <h1 className="text-center text-3xl font-bold">
         <span className="font-handwrite text-4xl text-primary">Concept</span>{" "}
         Check

@@ -4,6 +4,8 @@ import AddFriend from "@/components/client/AddFriend";
 
 import LateralNav from "@/components/LateralNav";
 
+import { redirect } from "next/navigation";
+
 import prisma from "@/lib/db";
 import FriendsSection from "@/components/client/FriendsSection";
 

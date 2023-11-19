@@ -1,5 +1,7 @@
 // /api/course/generateCourse
 
+import { getAuthSession } from "@/lib/auth";
+
 import prisma from "@/lib/db";
 import strict_output from "@/lib/gpt";
 import {
@@ -11,6 +13,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
+    const session = await getAuthSession();
+
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
     const { lessonId } = await req.json();
 
     console.log(lessonId);
@@ -33,12 +41,12 @@ export async function POST(req) {
     }
     const videoId = await searchYoutube(lesson.youtubeSearchQuery);
     let transcript = await getTranscript(videoId);
-    let maxLength = 200;
+    let maxLength = 300;
     transcript = transcript.split(" ").slice(0, maxLength).join(" ");
 
     const { summary } = await strict_output(
       "You are an AI capable of summarising a youtube transcript",
-      "summarise in 100 words or less and do not talk of the sponsors or anything unrelated to the main topic, BE BRIEF, also do not introduce what the summary is about.\n" +
+      "summarise the youtube transcript in maximum 300 words. Do not mention the creators name or any giveaways or promo codes they do. Do not talk of the sponsors, or anything unrelated to the main topic, BE BRIEF, also do not introduce what the summary is about.\n" +
         transcript,
       { summary: "summary of the transcript" },
     );
