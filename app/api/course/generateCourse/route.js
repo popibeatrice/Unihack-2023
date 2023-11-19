@@ -41,19 +41,19 @@ export async function POST(req) {
     }
     const videoId = await searchYoutube(lesson.youtubeSearchQuery);
     let transcript = await getTranscript(videoId);
-    let maxLength = 200;
+    let maxLength = 400;
     transcript = transcript.split(" ").slice(0, maxLength).join(" ");
 
     const { summary } = await strict_output(
       "You are an AI capable of summarising a youtube transcript",
-      "summarise the youtube transcript in maximum 150 words, BE BRIEF. Do not mention the creators name or any giveaways or promo codes they do. Do not talk of the sponsors, or anything unrelated to the main topic, BE BRIEF, also do not introduce what the summary is about.\n" +
+      "summarise the youtube transcript in maximum 200 words, BE BRIEF. Do not mention the creators name or any giveaways or promo codes they do. Do not talk of the sponsors, or anything unrelated to the main topic, BE BRIEF, also do not introduce what the summary is about.\n" +
         transcript,
       { summary: "summary of the transcript" },
     );
 
     console.log("SUMMARY", summary);
 
-    const questions = await getQuestionsFromTranscript(summary, lesson.name);
+    const questions = await getQuestionsFromTranscript(transcript, lesson.name);
 
     console.log("QUESTIONS", questions);
 
