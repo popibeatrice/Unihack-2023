@@ -53,8 +53,20 @@ export default async function Home() {
           priority
         ></Image>
         <p className="block max-w-sm text-center text-zinc-400 sm:hidden">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-          obcaecati?
+          Learn from the{" "}
+          <span className="font-handwrite text-xl font-semibold text-primary">
+            best
+          </span>
+          , and let the AI do the{" "}
+          <span className="font-handwrite text-xl font-semibold text-primary">
+            rest
+          </span>
+          . Get a personalized learning experience, tailored to your needs, in
+          just{" "}
+          <span className="font-handwrite text-xl font-semibold text-primary">
+            a few clicks
+          </span>
+          .
         </p>
       </div>
     </main>
