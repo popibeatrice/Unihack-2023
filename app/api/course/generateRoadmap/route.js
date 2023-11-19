@@ -28,7 +28,6 @@ export async function POST(req) {
 
     console.log(output_units);
     console.log("Am terminat de generat");
-
     const course = await prisma.course.create({
       data: {
         name: courseTheme,
