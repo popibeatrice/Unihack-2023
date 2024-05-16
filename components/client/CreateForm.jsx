@@ -58,7 +58,7 @@ export default function CreateForm({
         const res = await axios.post("/api/course/generateQuestions", {
           courseTheme,
         });
-        setGeneratedQuestions(res.data.questions);
+        setGeneratedQuestions(res.data);
       } catch (error) {
         console.log(error);
       } finally {

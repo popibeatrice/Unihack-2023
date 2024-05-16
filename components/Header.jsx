@@ -4,10 +4,15 @@ import Link from "next/link";
 
 function Header({ children }) {
   return (
-    <nav className="mx-auto mb-6 flex w-full max-w-7xl items-center justify-between py-8">
+    <nav className="mx-auto flex h-32 w-[95%] max-w-6xl items-center justify-between sm:w-[90%]">
       <Link className="flex items-center justify-center gap-2" href="/">
-        <Image src={logo} alt="logo" priority className="h-10 w-10" />
-        <p className="font-handwrite text-xl">Didactify</p>
+        <Image
+          src={logo}
+          alt="Didactify logo"
+          priority
+          className=":h-8 w-8 lg:h-9 lg:w-9"
+        />
+        <p className="font-handwrite text-2xl sm:text-2xl">Didactify</p>
       </Link>
       {children}
     </nav>

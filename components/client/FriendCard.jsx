@@ -4,17 +4,19 @@ import { Button } from "../ui/button";
 
 function FriendCard({ imgUrl, children, declineFriendRequest, id }) {
   return (
-    <li className="flex items-center justify-between gap-3 rounded-xl bg-zinc-700 px-4 py-2">
+    <li className="flex items-center justify-between gap-3 rounded-xl bg-zinc-700 p-2">
       <div class="flex items-center justify-center gap-4">
-        <Avatar className="h-10 w-10 sm:h-12 sm:w-12">
+        <Avatar className="h-8 w-8 sm:h-12 sm:w-12">
           <AvatarImage src={imgUrl} />
           <AvatarFallback>PFP</AvatarFallback>
         </Avatar>
-        <span className="text-xl font-medium">{children}</span>
+        <span className="text-lg font-medium">{children}</span>
       </div>
       <Button
         type="button"
-        className="bg-red-700 duration-300 hover:bg-red-800"
+        size="sm"
+        variant="destructive"
+        className=""
         onClick={() => declineFriendRequest(id)}
       >
         <svg

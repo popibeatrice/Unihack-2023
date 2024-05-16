@@ -68,8 +68,7 @@ function FriendsSection({ session, pendingRequestsList, friendsList }) {
         </TabsTrigger>
       </TabsList>
       <TabsContent className="w-full max-w-2xl" value="requests">
-        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-5">
-          <h2 className="text-center text-3xl">Requests</h2>
+        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-3 sm:p-5">
           {pendingRequests.length > 0 ? (
             <ul className="max-h-[300px] w-[95%] overflow-y-auto md:w-[90%]">
               {pendingRequests.map((sender) => (
@@ -90,12 +89,9 @@ function FriendsSection({ session, pendingRequestsList, friendsList }) {
         </div>
       </TabsContent>
       <TabsContent className="w-full max-w-2xl" value="friends">
-        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-5">
-          <h2 className="text-center text-3xl tracking-wide md:text-4xl">
-            Friends
-          </h2>
+        <div className="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-zinc-800 p-3 sm:p-5">
           {friends.length > 0 ? (
-            <ul className="max-h-[300px] w-[95%] overflow-y-auto md:w-[90%]">
+            <ul className="max-h-[300px] w-full overflow-y-auto">
               {friends.map((friend) => (
                 <FriendCard
                   imgUrl={friend.icon}

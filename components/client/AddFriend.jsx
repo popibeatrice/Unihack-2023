@@ -53,14 +53,16 @@ function AddFriend() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-[90%] max-w-2xl flex-col items-center justify-start gap-3 sm:flex-row "
+        className="flex w-full max-w-xl flex-col items-center justify-start gap-3 sm:flex-row"
       >
         <FormField
           control={form.control}
           name="friend"
           render={({ field }) => (
             <FormItem className="w-full max-w-3xl">
-              <FormLabel className="text-lg">Friend&apos;s email</FormLabel>
+              <FormLabel className="text text-lg">
+                Friend&apos;s email
+              </FormLabel>
               <FormControl>
                 <Input
                   className="h-12"
@@ -74,7 +76,7 @@ function AddFriend() {
         />
         <Button
           type="submit"
-          className="h-12 self-start px-6 text-lg sm:self-end lg:text-2xl"
+          className="h-12 self-start py-0 text-lg sm:self-end"
         >
           Add
         </Button>

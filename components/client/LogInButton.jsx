@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 export default function LogInButton() {
   return (
     <Button type="button" variants="small" onClick={() => signIn("google")}>
-      Google Login
+      Login
     </Button>
   );
 }

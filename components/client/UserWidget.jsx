@@ -22,7 +22,7 @@ function UserWidget({ session }) {
       <DropdownMenuTrigger>
         <div className="relative flex cursor-pointer items-center justify-center gap-2  pl-4 text-lg font-semibold transition-all duration-500">
           <span className="hidden md:block">{userName}</span>
-          <Avatar className="h-12 w-12">
+          <Avatar className="h-10 w-10">
             <AvatarImage src={imgUrl} />
             <AvatarFallback>PFP</AvatarFallback>
           </Avatar>

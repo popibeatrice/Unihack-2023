@@ -58,16 +58,9 @@ export default async function Friends() {
   return (
     <>
       <LateralNav />
-      <main className="mx-auto flex min-h-[calc(100vh_-_175px)] w-full max-w-7xl flex-col items-center justify-start gap-10 sm:gap-16 md:gap-20">
-        <h1 className="text-center text-4xl sm:text-6xl">
-          Your <span className="font-handwrite text-primary">social</span>{" "}
-          portal
-        </h1>
+      <main className="mx-auto mt-8 flex min-h-[calc(100vh_-_128px)] w-[95%] max-w-6xl flex-col items-center justify-start gap-20 sm:w-[90%] sm:gap-24">
+        <h1 className="text-center text-4xl sm:text-6xl">Your social portal</h1>
         <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
-          <span className="text-3xl sm:self-end">
-            <span className="font-handwrite text-4xl text-primary">New</span>{" "}
-            friend:
-          </span>
           <AddFriend session={session} />
         </div>
         <div className="mb-32 flex w-full flex-col items-center justify-center gap-3">
